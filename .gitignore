@@ -1,0 +1,13 @@
+# Pythonキャッシュと仮想環境
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+
+# エディタやOS系ファイル
+.vscode/
+.DS_Store
+
+# 環境ファイル（必要に応じて）
+.env
