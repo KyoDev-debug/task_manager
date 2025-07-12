@@ -1,13 +1,18 @@
 import os
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+db = SQLAlchemy()
 
 def create_app():
-    app = Flask(__name__, template_folder=os.path.join(BASE_DIR, "..", "templates"))
-    app.config.from_pyfile("config.py")
+    # テンプレートフォルダの絶対パスを指定
+    template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../templates'))
+    app = Flask(__name__, template_folder=template_dir)
 
-    from app.routes import main
-    app.register_blueprint(main)
+    app.config.from_object('app.config.Config')
+    db.init_app(app)
+
+    from app.routes import main_bp
+    app.register_blueprint(main_bp)
 
     return app

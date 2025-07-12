@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>Task Manager</title>
+    <meta charset="UTF-8">
+    <title>業務管理ツール</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>Hello, Task Manager!</h1>
+    <h1>業務一覧</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.title.label }} {{ form.title() }}<br>
+        {{ form.status.label }} {{ form.status() }}<br>
+        {{ form.deadline.label }} {{ form.deadline() }}<br>
+        {{ form.submit() }}
+    </form>
+    <hr>
+    <ul>
+        {% for task in tasks %}
+        <li>{{ task.title }} - {{ task.status }} - {{ task.deadline }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
